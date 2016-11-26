@@ -1,0 +1,1 @@
+sudo raspivid -o - -w 1280 -h 720 -fps 25 -t 0 -b 2000000 | ffmpeg -f alsa -ar 128000 -channel_layout stereo -i hw:1,0 -ac 2 -f h264 -i - -vcodec copy -cutoff 18000 -acodec libfdk_aac -flags +global_header -b:a 128k -strict -2  -f flv -force_key_frames 'expr:gte(t,n_forced*2)' rtmp://a.rtmp.youtube.com/live2/XXyourIDhereXX
